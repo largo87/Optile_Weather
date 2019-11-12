@@ -12,10 +12,13 @@ class ContainerApp extends React.Component {
 		super(props);
 		this.state = {
       showComponent: false,
-      checked:true
+      checked:true,
+      active: false
      
 		}
 		this.showComponents = this.showComponents.bind(this);
+	      this.handleOnChange = this.handleOnChange.bind(this);
+
 	}
 
 	showComponents(e) {
@@ -45,7 +48,14 @@ class ContainerApp extends React.Component {
     return checkDay;
   }
   
+  handleOnChange(){
+        const currentState = this.state.active;
+        this.setState({ active: !currentState });
+  }
   
+  arrowOnclick(){
+    alert("Not implemented yet")
+  }
 
   render() {
     const { error, loading, products } = this.props;
@@ -60,17 +70,18 @@ class ContainerApp extends React.Component {
 
 
     return (
-      <div>          
+   <div>          
         <CheckboxGroup showComponents={this.showComponents} checked={this.state.checked}/>
+        <div  className="img-arrow">
+        <img src="https://img.icons8.com/material/24/000000/arrow.png" alt="to-right" style={{float: "right"}} onClick={this.arrowOnclick}></img>
+        <img src="https://img.icons8.com/material/24/000000/arrow-pointing-left--v2.png" alt="to-left" onClick={this.arrowOnclick}></img>
+          </div>
         <div className="row">
       {products.filter( data => this.getDateRange(data.dt_txt) === this.getCheckDay(0) || this.getDateRange(data.dt_txt) === this.getCheckDay(1) || this.getDateRange(data.dt_txt) === this.getCheckDay(2)).map( lista =>
-        <div className="column">
-            {this.state.showComponent ? 
-             <WeatherCard key={lista.dt} temperature={Math.round(lista.main.temp * 9/5 - 459.67) + ' °F' } date={lista.dt_txt.split(" ")[0]}/> :
-             <WeatherCard key={lista.dt} temperature={Math.round(lista.main.temp - 273.15) + ' °C' } date={lista.dt_txt.split(" ")[0]}/>}
+        <div className="column" >
+             <WeatherCard  handleOnChange={this.handleOnChange}  key={lista.dt} temperature={ this.state.showComponent ? Math.round(lista.main.temp * 9/5 - 459.67) + ' °F' : Math.round(lista.main.temp - 273.15) + ' °C'  } date={lista.dt_txt.split(" ")[0]}/>
         </div> 
-          
-       )} 
+     )}
         </div>
             {this.state.showComponent ?
              <BarGraph label={products.slice(0, 8).map( lista => Math.round(lista.main.temp * 9/5 - 459.67) + ' °F')}  axis = { products.slice(0, 8).map( lista => lista.main.temp * 9/5 - 459.67)}/> :
