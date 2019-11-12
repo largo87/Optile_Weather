@@ -4,9 +4,9 @@ import { Bar } from "react-chartjs-2";
 
 
 const BarGraph = (props) =>{
-    const CELSIUS = 273.15
-    const nextTemperature = props.products.slice(0, 8).map( lista => Math.round(lista.main.temp - CELSIUS) + ' °C')
-    const axiTemperature =  props.products.slice(0, 8).map( lista => lista.main.temp - CELSIUS)
+   
+    const nextTemperature = props.label
+    const axiTemperature =  props.axis
     const data = {
       labels: nextTemperature,
       datasets: [

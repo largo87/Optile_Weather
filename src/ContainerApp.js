@@ -29,9 +29,6 @@ class ContainerApp extends React.Component {
   
   }
 
-  
-
-
   render() {
     const { error, loading, products } = this.props;
     
@@ -58,8 +55,7 @@ class ContainerApp extends React.Component {
           
        )} 
         </div>
-         <BarGraph products={products}/>
-               
+        {this.state.showComponent ?  <BarGraph label={products.slice(0, 8).map( lista => Math.round(lista.main.temp * 9/5 - 459.67) + ' °F')}  axis = { products.slice(0, 8).map( lista => lista.main.temp * 9/5 - 459.67)}/> : <BarGraph label={products.slice(0, 8).map( lista => Math.round(lista.main.temp - 273.15) + ' °C')}  axis = { products.slice(0, 8).map( lista => lista.main.temp - 273.15)}/>}               
       </div>
     );
   }
