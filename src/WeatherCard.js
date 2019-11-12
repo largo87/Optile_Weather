@@ -28,7 +28,7 @@ export default function WeatherCard(props) {
 
   return (
   
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={props.handleOnChange}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           Weather of the Day
