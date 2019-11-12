@@ -105,6 +105,7 @@
 .column {
     float: left;
     padding: 5px;
+    cursor: pointer;
 }
 
 
@@ -114,4 +115,11 @@
     content: "";
     clear: both;
     display: table;
+}
+.border-card {
+    border-style: solid;
+}
+
+.img-arrow {
+    cursor: pointer;
 }
